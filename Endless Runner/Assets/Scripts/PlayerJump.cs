@@ -5,15 +5,18 @@ using UnityEngine;
 public class PlayerJump : MonoBehaviour
 {
     [Header("Jump Numbers")]
-    public float jumpForce; //For debug purposes, this is just a singular force applied to the rigidbody.
+    public float jumpForce; //For debug purposes, this is just a singular force applied to the rigidbody
 
-    [Header("Components")] //Unity-specific components, most of which are set in Start().
+    [Header("Collision Info")]
+    public bool isGrounded; //Is the player on the ground?
+
+    [Header("Components")] //Unity-specific components, most of which are set in Start()
     Rigidbody2D rb;
     Animator anim;
 
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -22,9 +25,10 @@ public class PlayerJump : MonoBehaviour
         {
             Touch touch = Input.GetTouch(0); //Only one touch is needed because the only control is "tap."
 
-            if (touch.phase == TouchPhase.Start)
+            if (touch.phase == TouchPhase.Began) //
             {
-                rb.AddForce(jumpForce, ForceMode.Impulse);
+                //[If Player is grounded]
+                rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse); //Apply force for the jump
             }
         }
     }
