@@ -292,7 +292,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!70 &427428831
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -562,26 +562,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 548490143941044912, guid: b444c7ba2b1ad154f8fb26b1afef1962,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: -0.035683393
-      objectReference: {fileID: 0}
-    - target: {fileID: 548490143941044912, guid: b444c7ba2b1ad154f8fb26b1afef1962,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 2.1211057
-      objectReference: {fileID: 0}
-    - target: {fileID: 548490143941044912, guid: b444c7ba2b1ad154f8fb26b1afef1962,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: -0.049322844
-      objectReference: {fileID: 0}
-    - target: {fileID: 548490143941044912, guid: b444c7ba2b1ad154f8fb26b1afef1962,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 1.2221961
-      objectReference: {fileID: 0}
     - target: {fileID: 2470019570485210048, guid: b444c7ba2b1ad154f8fb26b1afef1962,
         type: 3}
       propertyPath: m_Name
