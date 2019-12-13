@@ -15,6 +15,6 @@ public class Coin : CollectableItem
     {
         Instantiate(collectPFX, transform.position, Quaternion.identity); //Spawns collect particle system
         //Play sound here
-        GameManager.instance.AddCoinToCounters(coinValue); //Adds this coin's value to both coin counters
+        GameManager.instance.UpdateCoinCountersInCoinManager(coinValue); //Adds this coin's value to both coin counters
     }
 }

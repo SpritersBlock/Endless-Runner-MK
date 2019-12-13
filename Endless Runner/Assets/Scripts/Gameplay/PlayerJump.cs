@@ -38,19 +38,25 @@ public class PlayerJump : MonoBehaviour
 
     void DetectTouches()
     {
-        if (Input.touchCount > 0) //If there's any touch on the screen...
+        if (GameManager.instance.gameActive) //Input is only stored if the game is active
         {
-            Touch touch = Input.GetTouch(0); //Only one touch is needed because the only control is "tap."
+            if (Input.touchCount > 0) //If there's any touch on the screen...
+            {
+                Touch touch = Input.GetTouch(0); //Only one touch is needed because the only control is "tap."
 
-            if (touch.phase == TouchPhase.Began)
-            {
-                if (isGrounded){ //Player can only jump when grounded
-                    Jump();
+                if (touch.phase == TouchPhase.Began)
+                {
+                    if (isGrounded)
+                    { //Player can only jump when grounded
+                        Jump();
+                    }
                 }
-            } else if (touch.phase == TouchPhase.Ended)
-            {
-                if (!isGrounded && rb.velocity.y >= 2){ //If player is in the air
-                    StartFall();
+                else if (touch.phase == TouchPhase.Ended)
+                {
+                    if (!isGrounded && rb.velocity.y >= 2)
+                    { //If player is in the air
+                        StartFall();
+                    }
                 }
             }
         }
