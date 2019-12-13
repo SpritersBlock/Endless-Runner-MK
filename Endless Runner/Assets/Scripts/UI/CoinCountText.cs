@@ -17,6 +17,6 @@ public class CoinCountText : MonoBehaviour
 
     public void UpdateInfo(int newCoinTotal)
     {
-        coinCountText.text = prefix + newCoinTotal.ToString();
+        coinCountText.text = prefix + newCoinTotal;
     }
 }

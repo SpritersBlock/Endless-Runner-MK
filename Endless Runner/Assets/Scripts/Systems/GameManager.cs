@@ -42,7 +42,9 @@ public class GameManager : MonoBehaviour
 
     void BeginGamePrep() 
     {
-        UpdateCoinCounters(); //Make sure the counters know how many coins the player has at the start of the level
+        localCoinCount = 0; //Resets local coin count at the beginning of the run
+        //UpdateCoinCounters(); //Make sure the counters know how many coins the player has at the start of the level
+        Invoke("UpdateCoinCounters", 0.01f); //For some reason just calling the function is giving me an error, so this is a temporary fix until I get it working properly
     }
 
     public void AddCoinToCounters(int coinValue) //Adds coin value to both local and global coin count
