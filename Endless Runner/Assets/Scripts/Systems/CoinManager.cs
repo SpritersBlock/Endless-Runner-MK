@@ -14,7 +14,14 @@ public class CoinManager : MonoBehaviour
     private void Start()
     {
         globalCoinCount = GameManager.instance.globalCoinCount;
+        FindCoinCountTexts();
         Invoke("UpdateCoinCounterText", 0.0005f); //For some reason calling the function normally causes a NullRefException error but invoking it is fine. Will look into later
+    }
+
+    void FindCoinCountTexts() //If, by any chance, the CoinCountTexts are null, find them.
+    {
+        localCoinCountText = GameObject.Find("CoinCountTxt").GetComponent<CoinCountText>();
+        globalCoinCountText = GameObject.Find("TotalCoinCountTxt").GetComponent<CoinCountText>();
     }
 
     public void AddCoinToCounters(int coinValue) //Adds coin value to both local and global coin count
