@@ -21,10 +21,14 @@ public class PlayerJump : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void Update() //Input detection
+    {
+        DetectTouches(); //Detects touch controls
+    }
+
+    private void FixedUpdate() //Physics detection
     {
         CheckGrounded(); //Constantly check if player is grounded
-        DetectTouches(); //Detects touch controls
     }
 
     void CheckGrounded(){
