@@ -4,7 +4,9 @@ using UnityEngine;
 
 public abstract class CollectableItem : MonoBehaviour
 {
-    public abstract void BeCollected();
+    //Abstract class for items that the player can collect
+
+    public abstract void BeCollected();//Initiate whatever behaviour the specific item has
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

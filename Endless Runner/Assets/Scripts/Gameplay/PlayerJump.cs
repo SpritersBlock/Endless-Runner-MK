@@ -31,11 +31,13 @@ public class PlayerJump : MonoBehaviour
         CheckGrounded(); //Constantly check if player is grounded
     }
 
-    void CheckGrounded(){
+    void CheckGrounded()
+    {
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundRayDist, groundLayer);
     }
 
-    void DetectTouches(){
+    void DetectTouches()
+    {
         if (Input.touchCount > 0) //If there's any touch on the screen...
         {
             Touch touch = Input.GetTouch(0); //Only one touch is needed because the only control is "tap."
@@ -54,12 +56,14 @@ public class PlayerJump : MonoBehaviour
         }
     }
 
-    void Jump(){
+    void Jump()
+    {
         rb.velocity = new Vector2(0, 0); //Resets velocity
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse); //Apply force for jump
     }
 
-    void StartFall(){ //This function provides variable jump height; when player releases tap before the apex of their full jump, they start to fall preemptively
+    void StartFall()
+    { //This function provides variable jump height; when player releases tap before the apex of their full jump, they start to fall preemptively
         rb.velocity = new Vector2(0, 0); //Resets velocity
         rb.AddForce(new Vector2(0, 2), ForceMode2D.Impulse); //Adds a little bit of force upwards to soften the hard fall down
     }
