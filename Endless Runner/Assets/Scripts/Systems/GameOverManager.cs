@@ -7,7 +7,8 @@ public class GameOverManager : MonoBehaviour
 {
     [Header("Game Objects")]
     GameObject gameOverPanel;
-    GameObject GUINull;
+    GameObject GUINull; //All the coin/score text displayed throughout the game that will be deactivated once the game over panel above displays
+    public GameObject playerDeathClone; //This will be spawned upon the player's death and fly towards the screen
 
     [Header("Game Over Text")]
     public TextMeshProUGUI[] gameOverText; //The updated text on the game over screen. 0 = distance, 1 = coins this run, 2 = total coins, 3 = final score
@@ -33,9 +34,11 @@ public class GameOverManager : MonoBehaviour
 
         PlayerJump player = FindObjectOfType<PlayerJump>(); //Find the player, because we only need it for the death sequence right now
 
+        Instantiate(playerDeathClone, player.transform.position, Quaternion.identity); //Spawns the death clone in before deactivating the player object
+
         player.gameObject.SetActive(false); //Deactivate the player object, so we can spawn something else in there instead
 
-        yield return new WaitForSeconds(1f); //Wait for a second before information is given to the player
+        yield return new WaitForSeconds(1.4f); //Wait for a bit before information is given to the player
 
         GUINull.SetActive(false); //Keep all the GUI elements as children of a null to deactivate them all at once
 
