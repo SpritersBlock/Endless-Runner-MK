@@ -20,4 +20,9 @@ public class ScrollToTheSide : MonoBehaviour
             transform.Translate(Vector2.left * speed * Time.deltaTime);
         }
     }
+
+    private void OnBecameInvisible() //Whenever objects go off-screen...
+    {
+        Destroy(gameObject); //...they're destroyed, so that they're not hanging around in the game's memory
+    }
 }
