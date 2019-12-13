@@ -10,7 +10,6 @@ public abstract class CollectableItem : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("test");
             BeCollected();
             Destroy(gameObject);
         }
