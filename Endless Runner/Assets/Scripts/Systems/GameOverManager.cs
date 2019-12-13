@@ -1,17 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameOverManager : MonoBehaviour
 {
+    [Header("Game Objects")]
     GameObject gameOverPanel;
-    CoinManager coinManager;
+    GameObject GUINull;
+
+    [Header("Game Over Text")]
+    public TextMeshProUGUI[] gameOverText; //The updated text on the game over screen. 0 = distance, 1 = coins this run, 2 = total coins, 3 = final score
 
     // Start is called before the first frame update
     void Start()
     {
         gameOverPanel = transform.GetChild(0).gameObject;
-        coinManager = FindObjectOfType<CoinManager>();
+        GUINull = GameObject.Find("GUI Null");
+    }
+
+    public void UpdateGameOverText(int distance, int locCoin, int globCoin, int score) //Updates the text in the game over screen
+    {
+        gameOverText[0].text = distance.ToString() + " miles";
+        gameOverText[1].text = locCoin.ToString() + " coins";
+        gameOverText[2].text = globCoin.ToString() + " total coins";
+        gameOverText[3].text = score.ToString();
     }
 
     public IEnumerator GameOverSequence()
@@ -24,7 +37,7 @@ public class GameOverManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f); //Wait for a second before information is given to the player
 
-        coinManager.DeactivateCoinCounterTexts();
+        GUINull.SetActive(false); //Keep all the GUI elements as children of a null to deactivate them all at once
 
         gameOverPanel.SetActive(true);
 

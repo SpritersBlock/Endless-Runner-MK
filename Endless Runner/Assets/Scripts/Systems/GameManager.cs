@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public float gameSpeed = 1; //The speed at which objects will travel to the left. A factor of the game's difficulty
 
     [Header("Components")]
-    CoinManager coinManager; //CoinManagers are per run (they aren't DDOL), but eventually save to globalCoinCount
+    ScoreManager scoreManager; //CoinManagers are per run (they aren't DDOL), but eventually save to globalCoinCount
 
 
     private void Awake()
@@ -40,20 +40,13 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
-
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         BeginGamePrep();
-    }
-
-    private void Start()
-    {
-        
     }
 
     void BeginGamePrep() //Move all the preparation stuff into its own function
@@ -61,18 +54,18 @@ public class GameManager : MonoBehaviour
         gameActive = true;
     }
 
-    
-
     public void UpdateCoinCountersInCoinManager(int coinValue)
     {
-        coinManager = FindObjectOfType<CoinManager>();
-        coinManager.AddCoinToCounters(coinValue);
-        globalCoinCount = coinManager.globalCoinCount;
+        scoreManager = FindObjectOfType<ScoreManager>();
+        scoreManager.AddCoinToCounters(coinValue);
+        globalCoinCount = scoreManager.globalCoinCount;
     }
 
     public void StartGameOverSequence()
     {
         GameOverManager goMan = FindObjectOfType<GameOverManager>(); //GameOverManager is per level because it contains references to objects in their specific scene
+        scoreManager = FindObjectOfType<ScoreManager>();
+        goMan.UpdateGameOverText(scoreManager.distanceTraveled, scoreManager.localCoinCount, scoreManager.globalCoinCount, scoreManager.score);
         goMan.StartCoroutine("GameOverSequence");
     }
 }
