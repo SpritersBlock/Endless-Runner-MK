@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     public CoinCountText localCoinCountText; //The text displaying the local coin count
     public CoinCountText globalCoinCountText; //The text displaying the global coin count
 
+    [Header("Game Variables")]
+    public float gameSpeed = 1; //The speed at which objects will travel to the left. A factor of the game's difficulty
+
     private void Awake()
     {
         // V Singleton

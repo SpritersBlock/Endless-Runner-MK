@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6157436195782417100}
   - component: {fileID: 6157436195782417139}
   - component: {fileID: 3234342064898290108}
+  - component: {fileID: 48242232448804827}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Collectable
@@ -110,5 +111,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b87fed383a743d4783e3d1fc76da353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coinValue: 1
   collectPFX: {fileID: 4636562417940379453, guid: a6ae8549929178840bc77d590bef4d02,
     type: 3}
+--- !u!114 &48242232448804827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6157436195782417138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3851ab2424ae7094d9176f3bdaa0315f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
