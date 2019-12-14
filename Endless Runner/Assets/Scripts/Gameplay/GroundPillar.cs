@@ -9,8 +9,8 @@ public class GroundPillar : MonoBehaviour
     BoxCollider2D boxC;
 
     [Header("Ground Size Values")] //How tall/wide the ground is. Set in start to avoid complications with the spawn manager
-    public float platformMinWidth = 1;
-    public float platformMaxWidth = 3;
+    public float platformMinWidth = 1; //These are all default values and probably
+    public float platformMaxWidth = 3; //aren't very accurate to gameplay
     public float platformMinHeight = 1;
     public float platformMaxHeight = 3;
 
