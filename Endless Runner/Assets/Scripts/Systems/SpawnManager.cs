@@ -29,6 +29,7 @@ public class SpawnManager : MonoBehaviour
     {
         groundLength = ground.GetComponent<SpriteRenderer>().size.x; //Get the length of the ground prefab so we can build in even units
         InitialGroundSpawn();
+        StartCoroutine("SpawnBGElements");
     }
 
     public void SpawnObjectType(string nameOfObject)
@@ -42,15 +43,26 @@ public class SpawnManager : MonoBehaviour
 
         for (int i = 1; i < numberOfTilesSpawned; i++) //i starts at 1 because there's already a ground tile beneath the player
         {
-            GameObject groundClone = Instantiate(ground, initialGround.transform.position + new Vector3(groundLength * i, 0), Quaternion.identity); //Builds another ground tile ahead as many times as we set in numberOfTilesSpawned
+            GameObject groundClone = Instantiate(ground, initialGround.transform.position + new Vector3(groundLength * i, 0), Quaternion.identity, gameObject.transform); //Builds another ground tile ahead as many times as we set in numberOfTilesSpawned
         }
     }
 
-    public void SpawnGround(Transform groundTransform)
+    public void SpawnGround(Transform groundTransform) //Whenever a ground tile passes the player X coord, another one is added to the track
     {
         if (GameManager.instance.gameActive) //Only load ground tiles when game is active
         {
-            GameObject groundClone = Instantiate(ground, groundTransform.position + new Vector3(groundLength * numberOfTilesSpawned, 0), Quaternion.identity);
+            GameObject groundClone = Instantiate(ground, groundTransform.position + new Vector3(groundLength * numberOfTilesSpawned, 0), Quaternion.identity, gameObject.transform);
         }
+    }
+
+    IEnumerator SpawnBGElements()
+    {
+        while (GameManager.instance.gameActive)
+        {
+            yield return new WaitForSeconds(Random.Range(GameManager.instance.gameSpeed / 5, GameManager.instance.gameSpeed / 2)); //Wait for a fraction of the game speed
+            Instantiate(cloud, bgSpawnPositions[Random.Range(0, bgSpawnPositions.Length)], Quaternion.identity, gameObject.transform); //Spawn a cloud at one of the BG spawn positions
+        }
+
+        yield return null;
     }
 }

@@ -14,6 +14,7 @@ public class ScoreManager : MonoBehaviour
 
     [Header("Distance Management")]
     public int distanceTraveled; //How far the player has traveled
+    public float howSmallIsAMile = 0.5f; //How often does the distance score update?
 
     [Header("Score Management")]
     public int score; //The player's current score
@@ -32,7 +33,7 @@ public class ScoreManager : MonoBehaviour
     {
         if (GameManager.instance.gameActive) //Update the score when the game is being played
         {
-            score = distanceTraveled + localCoinCount;
+            score = distanceTraveled + localCoinCount; //Adds collected coins to distance score for final score
             UpdateScore();
         }
     }
@@ -46,8 +47,8 @@ public class ScoreManager : MonoBehaviour
     {
         while (GameManager.instance.gameActive)
         {
-            yield return new WaitForSeconds(0.5f);
-            distanceTraveled += 1;
+            yield return new WaitForSeconds(howSmallIsAMile); //Every so often (determined by variable)...
+            distanceTraveled += 1; //Increase distance score
         }
 
         yield return null;
@@ -64,10 +65,10 @@ public class ScoreManager : MonoBehaviour
     {
         localCoinCount += coinValue; //Adds coin value to local coin count
         globalCoinCount += coinValue; //Adds coin value to global coin count
-        UpdateCoinCounterText();
+        UpdateCoinCounterText(); //Gives the player the visual feedback of collecting coins and adding to score
     }
 
-    public void UpdateCoinCounterText()
+    public void UpdateCoinCounterText() //Gives the player the visual feedback of collecting coins and adding to score
     {
         localCoinCountText.UpdateInfo(localCoinCount);
         globalCoinCountText.UpdateInfo(globalCoinCount);

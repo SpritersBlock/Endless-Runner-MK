@@ -27,5 +27,7 @@ public class PlayerDeathClone : MonoBehaviour
         //Screenshake here probably. This is the screen hitting part.
 
         rb.angularVelocity = 0; //Stop the player from spinning once they hit the screen
+
+        Destroy(gameObject, 5f); //Make sure the object despawns after falling off the screen
     }
 }
