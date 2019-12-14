@@ -75,6 +75,22 @@ public class PlayerJump : MonoBehaviour
                     }
                 }
             }
+
+            //Below is a way to test the game on a computer. This shouldn't be relevant to the final game but it does mean I don't have to keep plugging my phone in and booting up Unity Remote 5.
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (isGrounded)
+                {
+                    Jump();
+                }
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                if (!isGrounded && rb.velocity.y >= 2)
+                {
+                    StartFall();
+                }
+            }
         }
     }
 
