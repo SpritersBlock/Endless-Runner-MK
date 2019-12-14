@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerJump : MonoBehaviour
 {
-    [Header("Jump Numbers")]
+    [Header("Jump Info")]
     public float jumpForce; //For debug purposes, this is just a singular force applied to the rigidbody
+    public bool isAirborne; //Is the player jumping, or otherwise in the air?
 
     [Header("Collision Info")]
     public bool isGrounded; //Is the player on the ground?
@@ -33,7 +34,22 @@ public class PlayerJump : MonoBehaviour
 
     void CheckGrounded()
     {
-        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundRayDist, groundLayer);
+        if (rb.velocity.y == 0) //Is the player's vertical velocity still?
+        {
+            if (!isAirborne) //The player's vertical velocity is 0 at the apex of their jump so let's take that into account
+            {
+                isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundRayDist, groundLayer); //Because all of the ground pillar is part of the ground layer, being in front of the pillar (even midair) will count as being grounded, so we need to use isAirborne to check
+            }
+            else
+            {
+                isAirborne = false; //This turns the bool off after the apex of the player's jump, so isGrounded will turn back on upon landing
+            }
+        }
+        else
+        {
+            isAirborne = true; //If the player's vertical isn't 0, they must be airborne...
+            isGrounded = false; //...and therefore not grounded
+        }
     }
 
     void DetectTouches()
@@ -64,6 +80,7 @@ public class PlayerJump : MonoBehaviour
 
     void Jump()
     {
+        isAirborne = true;
         rb.velocity = new Vector2(0, 0); //Resets velocity
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse); //Apply force for jump
     }
