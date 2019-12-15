@@ -20,17 +20,17 @@ public class GroundPillar : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         sr.size = new Vector2(Random.Range(platformMinWidth, platformMaxWidth), Random.Range(platformMinHeight, platformMaxHeight));
         boxC = GetComponent<BoxCollider2D>();
-        boxC.size = sr.size; //Because we're using the Platform Effector 2D, the box collider can take up the whole space of the platform and only affect the player if they're standing on it
+        boxC.size = sr.size; //Because we're using the Platform Effector 2D, the box collider can take up the whole space of the platform and only affect the player if they're above it
     }
 
     void SpawnObjectsOnTop()
     {
-        int diceRoll = Random.Range(1, 2);
-        if (diceRoll == 1)
+        bool spawnObjectsOnTop = (Random.value > 0.5f); //Randomly chooses whether to spawn objects on top of the pillar
+        if (!spawnObjectsOnTop)
         {
             return;
         }
-        if (diceRoll == 2)
+        if (spawnObjectsOnTop)
         {
             //We might want to put items on top, so potentially spawn items here
         }
