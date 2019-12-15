@@ -105,7 +105,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -4896,11 +4896,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 10
+  isAirborne: 0
   isGrounded: 0
   groundRayDist: 1.15
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
+  jumpPFX: {fileID: 2458317289106812614, guid: 4e31907a6b63f094a83011805f109df1, type: 3}
 --- !u!1 &9205210845847701787
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,7 +23,7 @@ public class CoinSpawner : MonoBehaviour
 
         if (doubleCoins)
         {
-            Instantiate(coinClone, transform.position + new Vector3(0, distanceBetweenCoins), Quaternion.identity, transform); //Spawns a coin above the center coin
+            Instantiate(coinClone, transform.position + new Vector3(0, 2), Quaternion.identity, transform); //Spawns a coin above the center coin
         }
         
         for (int i = 1; i < numberOfCoinsOnSide; i++)
@@ -31,7 +31,7 @@ public class CoinSpawner : MonoBehaviour
             Instantiate(coinClone, transform.position + new Vector3(distanceBetweenCoins * i, 0), Quaternion.identity, transform); //Spawn half of the coin group on the right side of the center coin. i = 1 because we don't want coins spawning in the center
             if (doubleCoins)
             {
-                Instantiate(coinClone, transform.position + new Vector3(distanceBetweenCoins * i, distanceBetweenCoins), Quaternion.identity, transform); //Spawn a double of this coin up above
+                Instantiate(coinClone, transform.position + new Vector3(distanceBetweenCoins * i, 2), Quaternion.identity, transform); //Spawn a double of this coin up above
             }
         }
         for (int i = 1; i < numberOfCoinsOnSide; i++)
@@ -39,7 +39,7 @@ public class CoinSpawner : MonoBehaviour
             Instantiate(coinClone, transform.position + new Vector3(-distanceBetweenCoins * i, 0), Quaternion.identity, transform); //Spawn half of the coin group on the left side of the center coin. i = 1 because we don't want coins spawning in the center
             if (doubleCoins)
             {
-                Instantiate(coinClone, transform.position + new Vector3(-distanceBetweenCoins * i, distanceBetweenCoins), Quaternion.identity, transform); //Spawn a double of this coin up above
+                Instantiate(coinClone, transform.position + new Vector3(-distanceBetweenCoins * i, 2), Quaternion.identity, transform); //Spawn a double of this coin up above
             }
         }
     }

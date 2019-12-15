@@ -13,9 +13,10 @@ public class PlayerJump : MonoBehaviour
     public float groundRayDist = 1.15f; //How long the raycast determining groundedness is from the center of the player
 
     [Header("Components")] //Unity-specific components, most of which are set in Start()
+    public LayerMask groundLayer;
+    public ParticleSystem jumpPFX;
     Rigidbody2D rb;
     Animator anim;
-    public LayerMask groundLayer;
 
     void Start()
     {
@@ -99,6 +100,7 @@ public class PlayerJump : MonoBehaviour
         isAirborne = true;
         rb.velocity = new Vector2(0, 0); //Resets velocity
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse); //Apply force for jump
+        Instantiate(jumpPFX, transform.position + new Vector3(0, -groundRayDist), jumpPFX.gameObject.transform.rotation); //Spawns a puff of air for a little feedback
     }
 
     void StartFall()
