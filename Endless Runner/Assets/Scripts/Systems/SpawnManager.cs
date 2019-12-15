@@ -9,12 +9,6 @@ public class SpawnManager : MonoBehaviour
     public GameObject ground;
     float groundLength; //How long the ground tile is
 
-    [Header("Platforms")] //Platforms the player can run on
-    public GameObject platform;
-
-    [Header("Obstacles")] //If the player runs into these, the game ends
-    public GameObject cactus;
-
     [Header("Background Elements")] //These scroll in the background and are generally unimportant
     public GameObject cloud;
 

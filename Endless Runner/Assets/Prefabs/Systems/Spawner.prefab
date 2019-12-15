@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2891745034786555743
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2891745034786555728}
+  - component: {fileID: 2891745034786555729}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2891745034786555728
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2891745034786555743}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 20, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2891745034786555729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2891745034786555743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392f19bd8ea5c4d4a9a0d4abe8141e46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ground: {fileID: 6733392773394562245, guid: ccc8a27e641772a4cb21a8a061893faf, type: 3}
+  platform: {fileID: 8840671303643091768, guid: d23655f4bc86c9847bd490cef565e249,
+    type: 3}
+  cactus: {fileID: 6024033290068245791, guid: 9382d274b35d18d4195a82de24b7cbcd, type: 3}
+  cloud: {fileID: 1011778345027030692, guid: f70d24e56e52d9d4197582689fbd9cee, type: 3}
+  gameplaySpawnableObjects:
+  - {fileID: 6157436195782417138, guid: fac9618e6fb8375479f8c30a9872a8ad, type: 3}
+  - {fileID: 6024033290068245791, guid: 9382d274b35d18d4195a82de24b7cbcd, type: 3}
+  - {fileID: 8840671303643091768, guid: d23655f4bc86c9847bd490cef565e249, type: 3}
+  - {fileID: 6024033290068245791, guid: f7be29f74680c6e469b046af48164835, type: 3}
+  bgSpawnPositions:
+  - {x: 20, y: 0.55, z: 0}
+  - {x: 20, y: 2, z: 0}
+  - {x: 20, y: 3.5, z: 0}
+  numberOfTilesSpawned: 3
