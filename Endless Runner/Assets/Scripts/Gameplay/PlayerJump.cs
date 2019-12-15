@@ -7,6 +7,9 @@ public class PlayerJump : MonoBehaviour
     [Header("Jump Info")]
     public float jumpForce; //For debug purposes, this is just a singular force applied to the rigidbody
     public bool isAirborne; //Is the player jumping, or otherwise in the air?
+    public float fallMultiplier = 2.5f; //How much we're multiplying gravity by when player is falling down
+    public float lowJumpMultiplier = 2f; //How much we're multiplying gravity by when player releases the jump input early
+    bool isHoldingJump; //A bool to check if the player is holding the jump input
 
     [Header("Collision Info")]
     public bool isGrounded; //Is the player on the ground?
@@ -31,6 +34,7 @@ public class PlayerJump : MonoBehaviour
     private void FixedUpdate() //Physics detection
     {
         CheckGrounded(); //Constantly check if player is grounded
+        JumpPhysics();
     }
 
     void CheckGrounded()
@@ -53,6 +57,18 @@ public class PlayerJump : MonoBehaviour
         }
     }
 
+    void JumpPhysics() //Default Unity physics aren't great, so let's make our own jump physics!
+    {
+        if (rb.velocity.y < 0) //If the player is falling...
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime; //...Multiply vertical velocity
+        }
+        else if (rb.velocity.y > 0 && !isHoldingJump) //If the player is ascending but not holding the jump input (basically, has the player released the jump input early?)...
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime; //...Multiply vertical velocity but with a different var unique to letting go of the jump button early
+        }
+    }
+
     void DetectTouches()
     {
         if (GameManager.instance.gameActive) //Input is only stored if the game is active
@@ -63,23 +79,22 @@ public class PlayerJump : MonoBehaviour
 
                 if (touch.phase == TouchPhase.Began)
                 {
-                    if (isGrounded)
-                    { //Player can only jump when grounded
+                    isHoldingJump = true; //The player is holding the jump input
+                    if (isGrounded) //Player can only jump when grounded
+                    { 
                         Jump();
                     }
                 }
                 else if (touch.phase == TouchPhase.Ended)
                 {
-                    if (!isGrounded && rb.velocity.y >= 2)
-                    { //If player is in the air
-                        StartFall();
-                    }
+                    isHoldingJump = false; //The player is not holding the jump input
                 }
             }
 
             //Below is a way to test the game on a computer. This shouldn't be relevant to the final game but it does mean I don't have to keep plugging my phone in and booting up Unity Remote 5.
             if (Input.GetMouseButtonDown(0))
             {
+                isHoldingJump = true; //The player is holding the jump input
                 if (isGrounded)
                 {
                     Jump();
@@ -87,10 +102,7 @@ public class PlayerJump : MonoBehaviour
             }
             else if (Input.GetMouseButtonUp(0))
             {
-                if (!isGrounded && rb.velocity.y >= 2)
-                {
-                    StartFall();
-                }
+                isHoldingJump = false; //The player is not holding the jump input
             }
         }
     }
@@ -98,14 +110,9 @@ public class PlayerJump : MonoBehaviour
     void Jump()
     {
         isAirborne = true;
-        rb.velocity = new Vector2(0, 0); //Resets velocity
-        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse); //Apply force for jump
         Instantiate(jumpPFX, transform.position + new Vector3(0, -groundRayDist), jumpPFX.gameObject.transform.rotation); //Spawns a puff of air for a little feedback
-    }
 
-    void StartFall()
-    { //This function provides variable jump height; when player releases tap before the apex of their full jump, they start to fall preemptively
-        rb.velocity = new Vector2(0, 0); //Resets velocity
-        rb.AddForce(new Vector2(0, 2), ForceMode2D.Impulse); //Adds a little bit of force upwards to soften the hard fall down
+        rb.velocity = Vector2.up * jumpForce;//Apply force for jump
+
     }
 }

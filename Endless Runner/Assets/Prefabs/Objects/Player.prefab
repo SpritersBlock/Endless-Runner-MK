@@ -4897,6 +4897,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 10
   isAirborne: 0
+  fallMultiplier: 2.5
+  lowJumpMultiplier: 3
   isGrounded: 0
   groundRayDist: 1.15
   groundLayer:
