@@ -135,7 +135,7 @@ PrefabInstance:
     - target: {fileID: 8840671303643091773, guid: d23655f4bc86c9847bd490cef565e249,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 29.96
+      value: 36.58
       objectReference: {fileID: 0}
     - target: {fileID: 8840671303643091773, guid: d23655f4bc86c9847bd490cef565e249,
         type: 3}
@@ -856,7 +856,7 @@ PrefabInstance:
     - target: {fileID: 8840671303643091773, guid: d23655f4bc86c9847bd490cef565e249,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.67
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8840671303643091773, guid: d23655f4bc86c9847bd490cef565e249,
         type: 3}
@@ -960,7 +960,7 @@ PrefabInstance:
     - target: {fileID: 2470019570485210050, guid: b444c7ba2b1ad154f8fb26b1afef1962,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2470019570485210050, guid: b444c7ba2b1ad154f8fb26b1afef1962,
         type: 3}
@@ -1102,7 +1102,7 @@ PrefabInstance:
     - target: {fileID: 2891745034786555728, guid: 081e723f8c7d16e42a3c0093ecd5e3bd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2891745034786555728, guid: 081e723f8c7d16e42a3c0093ecd5e3bd,
         type: 3}
@@ -1176,7 +1176,7 @@ PrefabInstance:
     - target: {fileID: 6733392773394562240, guid: ccc8a27e641772a4cb21a8a061893faf,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6733392773394562240, guid: ccc8a27e641772a4cb21a8a061893faf,
         type: 3}
@@ -1215,7 +1215,7 @@ PrefabInstance:
     - target: {fileID: 8840671303643091773, guid: d23655f4bc86c9847bd490cef565e249,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.86
+      value: 6.36
       objectReference: {fileID: 0}
     - target: {fileID: 8840671303643091773, guid: d23655f4bc86c9847bd490cef565e249,
         type: 3}

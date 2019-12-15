@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6024033290068245779}
-  - component: {fileID: 6024033290068245778}
-  - component: {fileID: 6024033290068245789}
-  - component: {fileID: 6024033290068245788}
-  - component: {fileID: 6024033290068245776}
+  - component: {fileID: 5016746318049395761}
+  - component: {fileID: 2507674237193763593}
+  - component: {fileID: 2898027702818342114}
+  - component: {fileID: 3086811144627786619}
   m_Layer: 0
   m_Name: CactusSmall
   m_TagString: Untagged
@@ -28,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6024033290068245791}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20, y: -2.862, z: 0}
-  m_LocalScale: {x: 0.5977, y: 0.713, z: 1}
+  m_LocalPosition: {x: 20, y: -2.38, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &6024033290068245778
+--- !u!212 &5016746318049395761
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fe53cc29cc35c7b4a9da8740ef6a67e1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 80306834e4ad67b4da9b7dd3ca675b4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &6024033290068245789
+--- !u!61 &2507674237193763593
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,7 +96,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.15999365}
+  m_Offset: {x: 0, y: -0.63933325}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -107,9 +107,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.3024168, y: 3.038346}
+  m_Size: {x: 1.2748272, y: 2.0796669}
   m_EdgeRadius: 0
---- !u!114 &6024033290068245788
+--- !u!114 &2898027702818342114
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3851ab2424ae7094d9176f3bdaa0315f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6024033290068245776
+--- !u!114 &3086811144627786619
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

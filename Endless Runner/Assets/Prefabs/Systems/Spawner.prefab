@@ -44,9 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ground: {fileID: 6733392773394562245, guid: ccc8a27e641772a4cb21a8a061893faf, type: 3}
-  platform: {fileID: 8840671303643091768, guid: d23655f4bc86c9847bd490cef565e249,
+  smallCactus: {fileID: 6024033290068245791, guid: f7be29f74680c6e469b046af48164835,
     type: 3}
-  cactus: {fileID: 6024033290068245791, guid: 9382d274b35d18d4195a82de24b7cbcd, type: 3}
   cloud: {fileID: 1011778345027030692, guid: f70d24e56e52d9d4197582689fbd9cee, type: 3}
   gameplaySpawnableObjects:
   - {fileID: 6157436195782417138, guid: fac9618e6fb8375479f8c30a9872a8ad, type: 3}

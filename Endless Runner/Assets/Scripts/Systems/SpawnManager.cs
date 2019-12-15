@@ -9,6 +9,9 @@ public class SpawnManager : MonoBehaviour
     public GameObject ground;
     float groundLength; //How long the ground tile is
 
+    [Header("Foreground Elements")] //These are foreground elements, usually so we can detect their size
+    public GameObject smallCactus;
+
     [Header("Background Elements")] //These scroll in the background and are generally unimportant
     public GameObject cloud;
 
@@ -25,18 +28,16 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine("SpawnBGElements"); //Make sure the background elements are spawning
     }
 
-    //The below section of code has been made redundant by the Coroutine "SpawnFGElements" but I still think it's need so I'm keeping it here for you to look at.
-
-    //public void SpawnObjectType(string name) //This way, we can type in a string of an object we want to spawn, and it will be instantiated
-    //{
-    //    GameObject objectClone = Array.Find(gameplaySpawnableObjects, GameObject => GameObject.name == name);
-    //    if (objectClone == null) //If there's no object with that name in the array...
-    //    {
-    //        Debug.LogWarning("Game Object: " + name + " not found!"); //...Let people know
-    //        return;
-    //    }
-    //    Instantiate(objectClone, gameSpawnPositions[UnityEngine.Random.Range(0, gameSpawnPositions.Length)], Quaternion.identity); //Spawn that object we found, put it on a random y axis out of the ones we chose, and let the objects themselves do the rest
-    //}
+    public void SpawnObjectType(string name, Vector3 objPos) //This way, we can type in a string of an object we want to spawn, and it will be instantiated
+    {
+        GameObject objectClone = Array.Find(gameplaySpawnableObjects, GameObject => GameObject.name == name);
+        if (objectClone == null) //If there's no object with that name in the array...
+        {
+            Debug.LogWarning("Game Object: " + name + " not found!"); //...Let people know
+            return;
+        }
+        Instantiate(objectClone, objPos, Quaternion.identity);
+    }
 
     void InitialGroundSpawn() //We have CONTINUOUS ground spawning, but there's still a bunch of ground that needs to be spawned right away. That's this function
     {
