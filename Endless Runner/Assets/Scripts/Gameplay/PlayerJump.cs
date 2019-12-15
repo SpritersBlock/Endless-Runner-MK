@@ -7,8 +7,8 @@ public class PlayerJump : MonoBehaviour
     [Header("Jump Info")]
     public float jumpForce; //For debug purposes, this is just a singular force applied to the rigidbody
     public bool isAirborne; //Is the player jumping, or otherwise in the air?
-    public float fallMultiplier = 2.5f; //How much we're multiplying gravity by when player is falling down
-    public float lowJumpMultiplier = 2f; //How much we're multiplying gravity by when player releases the jump input early
+    public float fallMultiplier; //How much we're multiplying gravity by when player is falling down
+    public float lowJumpMultiplier; //How much we're multiplying gravity by when player releases the jump input early
     bool isHoldingJump; //A bool to check if the player is holding the jump input
 
     [Header("Collision Info")]
@@ -24,6 +24,7 @@ public class PlayerJump : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponentInChildren<Animator>(); //The animator is technically on the child object so grab it from there
     }
 
     void Update() //Input detection
@@ -35,6 +36,7 @@ public class PlayerJump : MonoBehaviour
     {
         CheckGrounded(); //Constantly check if player is grounded
         JumpPhysics();
+        AnimationChecks();
     }
 
     void CheckGrounded()
@@ -67,6 +69,11 @@ public class PlayerJump : MonoBehaviour
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime; //...Multiply vertical velocity but with a different var unique to letting go of the jump button early
         }
+    }
+
+    void AnimationChecks() //Here, variables are passed to the animator
+    {
+        anim.SetBool("isAirborne", isAirborne);
     }
 
     void DetectTouches()
@@ -110,6 +117,8 @@ public class PlayerJump : MonoBehaviour
     void Jump()
     {
         isAirborne = true;
+        anim.SetTrigger("jump");
+        FindObjectOfType<AudioManager>().Play("Jump");
         Instantiate(jumpPFX, transform.position + new Vector3(0, -groundRayDist), jumpPFX.gameObject.transform.rotation); //Spawns a puff of air for a little feedback
 
         rb.velocity = Vector2.up * jumpForce;//Apply force for jump

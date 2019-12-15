@@ -37,7 +37,6 @@ public class GroundPillar : MonoBehaviour
                 spawnManager.SpawnObjectType("CoinNull", transform.position + new Vector3(Random.Range(sr.size.x / -2, sr.size.x / 2), sr.size.y / 2));
             }
             bool spawnCactus = (Random.value > 0.5f); //Randomly chooses whether to spawn cacti on top of the pillar
-            spawnCactus = true;
             if (spawnCactus) //We'll spawn a small cactus up here so it's not too overwhelming
             {
                 spawnManager.SpawnObjectType("CactusSmall", transform.position + new Vector3(Random.Range(sr.size.x / -2, sr.size.x / 2), sr.size.y / 2) + new Vector3(0, spawnManager.smallCactus.GetComponent<SpriteRenderer>().sprite.bounds.extents.y)); //Spawns a cactus anywhere on the platform top, making sure to bump the cactus up by its own height since its pivot is in the center

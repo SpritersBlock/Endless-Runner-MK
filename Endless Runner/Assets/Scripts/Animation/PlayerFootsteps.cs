@@ -11,7 +11,7 @@ public class PlayerFootsteps : MonoBehaviour
     {
         if (playerJump.isGrounded)
         {
-            //Play Sound Here
+            FindObjectOfType<AudioManager>().Play("Step");
             dustPFX.Play();
         }
     }

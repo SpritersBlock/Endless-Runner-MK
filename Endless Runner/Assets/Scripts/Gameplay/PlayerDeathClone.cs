@@ -20,11 +20,13 @@ public class PlayerDeathClone : MonoBehaviour
     void StartDeathSequence()
     {
         rb.angularVelocity = angularForce;
+        FindObjectOfType<AudioManager>().Play("Hit");
     }
 
     public void HitTheScreen()
     {
         //Screenshake here probably. This is the screen hitting part.
+        FindObjectOfType<AudioManager>().Play("Punch");
 
         rb.angularVelocity = 0; //Stop the player from spinning once they hit the screen
 
