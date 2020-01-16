@@ -5,38 +5,38 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [Header("Ground")] //The ground the player runs on
+    [Header("Ground")]
     public GameObject ground;
-    float groundLength; //How long the ground tile is
+    float groundTileLength;
 
-    [Header("Foreground Elements")] //These are foreground elements, usually so we can detect their size
+    [Header("Foreground Elements")]
     public GameObject smallCactus;
 
-    [Header("Background Elements")] //These scroll in the background and are generally unimportant
+    [Header("Background Elements")]
     public GameObject cloud;
 
     [Header("Spawn Variables")]
-    public GameObject[] gameplaySpawnableObjects; //The GAMEPLAY objects that can spawn
-    public Vector3[] bgSpawnPositions; //For this project, this is just the heights that clouds spawn at. Worth differentiating from the above spawn positions
-    public int numberOfTilesSpawned; //How many instances of the ground tile do we want loaded?
+    public GameObject[] gameplaySpawnableObjects;
+    public Vector3[] bgSpawnPositions;
+    public int numberOfTilesSpawned;
 
     private void Start()
     {
-        groundLength = ground.GetComponent<SpriteRenderer>().size.x; //Get the length of the ground prefab so we can build in even units
+        groundTileLength = ground.GetComponent<SpriteRenderer>().size.x; //Get the length of the ground prefab so we can build in even units
         InitialGroundSpawn();
-        StartCoroutine("SpawnFGElements"); //Make sure the foreground elements are spawning
-        StartCoroutine("SpawnBGElements"); //Make sure the background elements are spawning
+        StartCoroutine("SpawnFGElements");
+        StartCoroutine("SpawnBGElements");
     }
 
     public void SpawnObjectType(string name, Vector3 objPos) //This way, we can type in a string of an object we want to spawn, and it will be instantiated
     {
         GameObject objectClone = Array.Find(gameplaySpawnableObjects, GameObject => GameObject.name == name);
-        if (objectClone == null) //If there's no object with that name in the array...
+        if (objectClone == null)
         {
-            Debug.LogWarning("Game Object: " + name + " not found!"); //...Let people know
+            Debug.LogWarning("Game Object: " + name + " not found!");
             return;
         }
-        Instantiate(objectClone, objPos, Quaternion.identity);
+        Instantiate(objectClone, objPos, Quaternion.identity, transform);
     }
 
     void InitialGroundSpawn() //We have CONTINUOUS ground spawning, but there's still a bunch of ground that needs to be spawned right away. That's this function
@@ -45,7 +45,7 @@ public class SpawnManager : MonoBehaviour
 
         for (int i = 1; i < numberOfTilesSpawned; i++) //i starts at 1 because there's already a ground tile beneath the player
         {
-            GameObject groundClone = Instantiate(ground, initialGround.transform.position + new Vector3(groundLength * i, 0), Quaternion.identity, gameObject.transform); //Builds another ground tile ahead as many times as we set in numberOfTilesSpawned
+            GameObject groundClone = Instantiate(ground, initialGround.transform.position + new Vector3(groundTileLength * i, 0), Quaternion.identity, transform); //Builds another ground tile ahead as many times as we set in numberOfTilesSpawned
         }
     }
 
@@ -53,7 +53,7 @@ public class SpawnManager : MonoBehaviour
     {
         if (GameManager.instance.gameActive) //Only load ground tiles when game is active
         {
-            GameObject groundClone = Instantiate(ground, groundTransform.position + new Vector3(groundLength * numberOfTilesSpawned, 0), Quaternion.identity, gameObject.transform);
+            GameObject groundClone = Instantiate(ground, groundTransform.position + new Vector3(groundTileLength * numberOfTilesSpawned, 0), Quaternion.identity, transform);
         }
     }
 
@@ -63,7 +63,7 @@ public class SpawnManager : MonoBehaviour
         {
             yield return new WaitForSeconds(UnityEngine.Random.Range(GameManager.instance.gameSpeed / 5, GameManager.instance.gameSpeed / 2)); //Wait for a fraction of the game speed
             GameObject instantiatedObject = gameplaySpawnableObjects[UnityEngine.Random.Range(0, gameplaySpawnableObjects.Length)]; //This just makes the next line a lot shorter
-            Instantiate(instantiatedObject, instantiatedObject.transform.position, Quaternion.identity); //Spawn a gameplay object
+            Instantiate(instantiatedObject, instantiatedObject.transform.position, Quaternion.identity, transform); //Spawn a gameplay object
         }
 
         yield return null;
@@ -74,7 +74,7 @@ public class SpawnManager : MonoBehaviour
         while (GameManager.instance.gameActive)
         {
             yield return new WaitForSeconds(UnityEngine.Random.Range(GameManager.instance.gameSpeed / 5, GameManager.instance.gameSpeed / 2)); //Wait for a fraction of the game speed
-            Instantiate(cloud, bgSpawnPositions[UnityEngine.Random.Range(0, bgSpawnPositions.Length)], Quaternion.identity, gameObject.transform); //Spawn a cloud at one of the BG spawn positions
+            Instantiate(cloud, bgSpawnPositions[UnityEngine.Random.Range(0, bgSpawnPositions.Length)], Quaternion.identity, transform); //Spawn a cloud at one of the BG spawn positions
         }
 
         yield return null;

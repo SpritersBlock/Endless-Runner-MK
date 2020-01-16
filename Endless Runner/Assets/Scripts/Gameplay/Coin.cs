@@ -13,7 +13,7 @@ public class Coin : CollectableItem
 
     public override void BeCollected()
     {
-        Instantiate(collectPFX, transform.position, Quaternion.identity); //Spawns collect particle system
+        Instantiate(collectPFX, transform.position, Quaternion.identity, transform); //Spawns collect particle system
         FindObjectOfType<AudioManager>().Play("Coin");
         GameManager.instance.UpdateCoinCountersInCoinManager(coinValue); //Adds this coin's value to both coin counters
     }

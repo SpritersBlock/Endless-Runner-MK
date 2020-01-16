@@ -119,7 +119,7 @@ public class PlayerJump : MonoBehaviour
         isAirborne = true;
         anim.SetTrigger("jump");
         FindObjectOfType<AudioManager>().Play("Jump");
-        Instantiate(jumpPFX, transform.position + new Vector3(0, -groundRayDist), jumpPFX.gameObject.transform.rotation); //Spawns a puff of air for a little feedback
+        Instantiate(jumpPFX, transform.position + new Vector3(0, -groundRayDist), jumpPFX.gameObject.transform.rotation, transform); //Spawns a puff of air for a little feedback
 
         rb.velocity = Vector2.up * jumpForce;//Apply force for jump
 
