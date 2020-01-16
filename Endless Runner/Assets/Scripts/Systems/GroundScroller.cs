@@ -4,23 +4,22 @@ using UnityEngine;
 
 public class GroundScroller : MonoBehaviour
 {
-    public Transform playerTrans; //We'll use this to detect when to spawn new tiles
-    bool hasSpawnedNewTile; //Each ground tile only needs to spawn one more, this controls that
+    [SerializeField] Transform playerTransform;
+    bool hasSpawnedNewTile;
 
-    // Start is called before the first frame update
     void Start()
     {
-        if (playerTrans == null) //If nobody assigns the player transform...
+        if (playerTransform == null) //This should be set in the inspector, but this is a failsafe.
         {
-            playerTrans = FindObjectOfType<PlayerJump>().transform; //...find it
+            playerTransform = FindObjectOfType<PlayerJump>().transform;
         }
     }
 
     private void LateUpdate()
     {
-        if (GameManager.instance.gameActive) //We only need to spawn new tiles while the game is active
+        if (GameManager.instance.gameActive)
         {
-            if (transform.position.x < playerTrans.position.x && !hasSpawnedNewTile) //If the ground tile passes the player and hasn't spawned a tile yet
+            if (transform.position.x < playerTransform.position.x && !hasSpawnedNewTile) //If the ground tile passes the player and hasn't spawned a tile yet
             {
                 FindObjectOfType<SpawnManager>().SpawnGround(transform);
                 hasSpawnedNewTile = true; //Makes sure only one ground tile can be spawned

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerFootsteps : MonoBehaviour
 {
     [SerializeField] ParticleSystem dustPFX;
-    public PlayerJump playerJump;
+    [SerializeField] PlayerJump playerJump;
 
     public void Footstep()
     {

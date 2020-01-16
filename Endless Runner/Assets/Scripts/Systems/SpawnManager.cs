@@ -6,19 +6,19 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     [Header("Ground")]
-    public GameObject ground;
-    float groundTileLength;
+    [SerializeField] GameObject ground;
+    [SerializeField] float groundTileLength;
 
     [Header("Foreground Elements")]
     public GameObject smallCactus;
 
     [Header("Background Elements")]
-    public GameObject cloud;
+    [SerializeField] GameObject cloud;
 
     [Header("Spawn Variables")]
-    public GameObject[] gameplaySpawnableObjects;
-    public Vector3[] bgSpawnPositions;
-    public int numberOfTilesSpawned;
+    [SerializeField] GameObject[] gameplaySpawnableObjects;
+    [SerializeField] Vector3[] bgSpawnPositions;
+    [SerializeField] int numberOfTilesSpawned;
 
     private void Start()
     {

@@ -7,7 +7,7 @@ public class PlayerDeathClone : MonoBehaviour
     //When this object is instantiated, it'll fly towards the screen in a fun little death animation.
 
     Rigidbody2D rb;
-    public float angularForce; //How intense the player spins as they fly off
+    [SerializeField] float angularForce; //How intense the player spins as they fly off
 
 
     // Start is called before the first frame update

@@ -10,10 +10,10 @@ public class GroundPillar : MonoBehaviour
     SpawnManager spawnManager; //Grab this to spawn items on top of the platforms
 
     [Header("Ground Size Values")] //How tall/wide the ground is. Set in start to avoid complications with the spawn manager
-    public float platformMinWidth = 1; //These are all default values and probably
-    public float platformMaxWidth = 3; //aren't very accurate to gameplay
-    public float platformMinHeight = 1;
-    public float platformMaxHeight = 3;
+    [SerializeField] float platformMinWidth = 1; //These are all default values and probably
+    [SerializeField] float platformMaxWidth = 3; //aren't very accurate to gameplay
+    [SerializeField] float platformMinHeight = 1;
+    [SerializeField] float platformMaxHeight = 3;
 
     // Start is called before the first frame update
     void Start()

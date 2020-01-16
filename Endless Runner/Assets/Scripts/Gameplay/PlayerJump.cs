@@ -5,19 +5,19 @@ using UnityEngine;
 public class PlayerJump : MonoBehaviour
 {
     [Header("Jump Info")]
-    public float jumpForce; //For debug purposes, this is just a singular force applied to the rigidbody
-    public bool isAirborne; //Is the player jumping, or otherwise in the air?
-    public float fallMultiplier; //How much we're multiplying gravity by when player is falling down
-    public float lowJumpMultiplier; //How much we're multiplying gravity by when player releases the jump input early
-    bool isHoldingJump; //A bool to check if the player is holding the jump input
+    [SerializeField] float jumpForce;
+    [SerializeField] bool isAirborne;
+    [SerializeField] float fallMultiplier; //How much we're multiplying gravity by when player is falling down
+    [SerializeField] float lowJumpMultiplier; //How much we're multiplying gravity by when player releases the jump input early
+    bool isHoldingJump;
 
     [Header("Collision Info")]
     public bool isGrounded; //Is the player on the ground?
-    public float groundRayDist = 1.15f; //How long the raycast determining groundedness is from the center of the player
+    [SerializeField] float groundRayDist = 1.15f; //How long the raycast determining groundedness is from the center of the player
 
     [Header("Components")] //Unity-specific components, most of which are set in Start()
-    public LayerMask groundLayer;
-    public ParticleSystem jumpPFX;
+    [SerializeField] LayerMask groundLayer;
+    [SerializeField] ParticleSystem jumpPFX;
     Rigidbody2D rb;
     Animator anim;
 
@@ -122,6 +122,5 @@ public class PlayerJump : MonoBehaviour
         Instantiate(jumpPFX, transform.position + new Vector3(0, -groundRayDist), jumpPFX.gameObject.transform.rotation, transform); //Spawns a puff of air for a little feedback
 
         rb.velocity = Vector2.up * jumpForce;//Apply force for jump
-
     }
 }

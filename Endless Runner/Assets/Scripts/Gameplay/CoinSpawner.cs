@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CoinSpawner : MonoBehaviour
 {
-    public float distanceBetweenCoins = 1.5f; //How much space is between coins in a group?
-    public int[] coinsPerGroup; //The number of coins that can spawn at once, all should be odd
-    public float heightVar = 2; //Coins can spawn higher than normal by a random amount, this is that value
-    public float maxNumberOfLanesUp = 2; //How many lanes coins can be spawned up; should be kept somewhat low in case they spawn on platforms
+    [SerializeField] float distanceBetweenCoins = 1.5f; //How much space is between coins in a group?
+    [SerializeField] int[] coinsPerGroup; //The number of coins that can spawn at once, all should be odd
+    [SerializeField] float heightVar = 2; //Coins can spawn higher than normal by a random amount, this is that value
+    [SerializeField] float maxNumberOfLanesUp = 2; //How many lanes coins can be spawned up; should be kept somewhat low in case they spawn on platforms
 
     private void Start()
     {

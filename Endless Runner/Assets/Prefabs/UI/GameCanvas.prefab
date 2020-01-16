@@ -1912,6 +1912,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734c7f6807b03eb43aa3dc78d61d1516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOverPanel: {fileID: 9136564811057909080}
+  GUINull: {fileID: 7708343164882549494}
   playerDeathClone: {fileID: 5400784836377962618, guid: aed761fdcaccf324ba350e93482551b3,
     type: 3}
   gameOverText:

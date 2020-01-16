@@ -5,27 +5,47 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
+    [Header("Game Management")] 
+    public static ScoreManager instance;
+
     [Header("Coin Managenent")]
     public int localCoinCount; //How many coins the player has collected since the *level* has started
     public int globalCoinCount = 0; //How many coins the player has collected over *all* play sessions
     [Space]
-    public CoinCountText localCoinCountText; //The text displaying the local coin count
-    public CoinCountText globalCoinCountText; //The text displaying the global coin count
+    [SerializeField] CoinCountText localCoinCountText; //The text displaying the local coin count
+    [SerializeField] CoinCountText globalCoinCountText; //The text displaying the global coin count
 
     [Header("Distance Management")]
     public int distanceTraveled; //How far the player has traveled
-    public float howSmallIsAMile = 0.5f; //How often does the distance score update?
+    [SerializeField] float howSmallIsAMile = 0.5f; //How often does the distance score update?
 
     [Header("Score Management")]
     public int score; //The player's current score
-    public TextMeshProUGUI scoreText; //The text that shows the player's current score
+    [SerializeField] TextMeshProUGUI scoreText; //The text that shows the player's current score
+
+    private void Awake()
+    {
+        // vvv Singleton
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+        // ^^^ Singleton
+    }
 
     private void Start()
     {
         globalCoinCount = GameManager.instance.globalCoinCount;
         FindUITexts();
         Invoke("UpdateCoinCounterText", 0.0005f); //For some reason calling the function normally causes a NullRefException error but invoking it is fine. Will look into later
-        StartCoroutine("UpdateDistance");
+        StartCoroutine(UpdateDistance());
         localCoinCount = 0;
     }
 
@@ -47,8 +67,8 @@ public class ScoreManager : MonoBehaviour
     {
         while (GameManager.instance.gameActive)
         {
-            yield return new WaitForSeconds(howSmallIsAMile); //Every so often (determined by variable)...
-            distanceTraveled += 1; //Increase distance score
+            yield return new WaitForSeconds(howSmallIsAMile);
+            distanceTraveled += 1;
         }
 
         yield return null;
@@ -56,9 +76,18 @@ public class ScoreManager : MonoBehaviour
 
     void FindUITexts() //If, by any chance, the CoinCountTexts are null, find them.
     {
-        localCoinCountText = GameObject.Find("CoinCountTxt").GetComponent<CoinCountText>();
-        globalCoinCountText = GameObject.Find("TotalCoinCountTxt").GetComponent<CoinCountText>();
-        scoreText = GameObject.Find("ScoreTxt").GetComponent<TextMeshProUGUI>();
+        if (!localCoinCountText)
+        {
+            localCoinCountText = GameObject.Find("CoinCountTxt").GetComponent<CoinCountText>();
+        }
+        if (!globalCoinCountText)
+        {
+            globalCoinCountText = GameObject.Find("TotalCoinCountTxt").GetComponent<CoinCountText>();
+        }
+        if (!scoreText)
+        {
+            scoreText = GameObject.Find("ScoreTxt").GetComponent<TextMeshProUGUI>();
+        }
     }
 
     public void AddCoinToCounters(int coinValue) //Adds coin value to both local and global coin count
