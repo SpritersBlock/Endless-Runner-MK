@@ -58,5 +58,7 @@ public class GameOverManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManagement.instance.GoToScene("runnerScene");
+        CheckIfComponentsAreNull();
+        ScoreManager.instance.GameSetUp();
     }
 }

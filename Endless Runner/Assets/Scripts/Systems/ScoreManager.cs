@@ -21,6 +21,7 @@ public class ScoreManager : MonoBehaviour
 
     [Header("Score Management")]
     public int score; //The player's current score
+    float timer;
     [SerializeField] TextMeshProUGUI scoreText; //The text that shows the player's current score
 
     private void Awake()
@@ -42,39 +43,55 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
-        globalCoinCount = GameManager.instance.globalCoinCount;
-        FindUITexts();
-        Invoke("UpdateCoinCounterText", 0.0005f); //For some reason calling the function normally causes a NullRefException error but invoking it is fine. Will look into later
-        StartCoroutine(UpdateDistance());
-        localCoinCount = 0;
+        GameSetUp();
     }
+
+    public void GameSetUp()
+    {
+        timer = howSmallIsAMile;
+        globalCoinCount = GameManager.instance.globalCoinCount;
+        localCoinCount = 0;
+        distanceTraveled = 0;
+        score = 0;
+        //UpdateCoinCounterText();
+        Invoke("UpdateCoinCounterText", 0.5f); //For some reason calling this function too quickly just doesn't make it work??
+        //If I have enough time I'm going to investigate this later but I want to get to object pooling by the end of today so this is taking a back seat for now.
+    }
+
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.P))
+    //    {
+    //        UpdateCoinCounterText(); //Debug stuff
+    //    }
+    //}
 
     private void FixedUpdate()
     {
         if (GameManager.instance.gameActive) //Update the score when the game is being played
         {
-            score = distanceTraveled + localCoinCount; //Adds collected coins to distance score for final score
-            UpdateScore();
+            if (timer > 0)
+            {
+                timer -= Time.deltaTime;
+            }
+            else
+            {
+                distanceTraveled += 1;
+                timer = howSmallIsAMile;
+                UpdateScore();
+            }
+            
         }
     }
 
     void UpdateScore()
     {
+        FindUITexts();
+        score = distanceTraveled + localCoinCount;
         scoreText.text = score.ToString();
     }
 
-    IEnumerator UpdateDistance()
-    {
-        while (GameManager.instance.gameActive)
-        {
-            yield return new WaitForSeconds(howSmallIsAMile);
-            distanceTraveled += 1;
-        }
-
-        yield return null;
-    }
-
-    void FindUITexts() //If, by any chance, the CoinCountTexts are null, find them.
+    public void FindUITexts() //If, by any chance, the CoinCountTexts are null, find them.
     {
         if (!localCoinCountText)
         {
@@ -90,16 +107,17 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public void AddCoinToCounters(int coinValue) //Adds coin value to both local and global coin count
+    public void AddCoinToCounters(int coinValue) //Adds coin value to both local and global coin count vars
     {
-        localCoinCount += coinValue; //Adds coin value to local coin count
-        globalCoinCount += coinValue; //Adds coin value to global coin count
-        UpdateCoinCounterText(); //Gives the player the visual feedback of collecting coins and adding to score
+        localCoinCount += coinValue;
+        globalCoinCount += coinValue;
+        UpdateCoinCounterText();
     }
 
     public void UpdateCoinCounterText() //Gives the player the visual feedback of collecting coins and adding to score
     {
         localCoinCountText.UpdateInfo(localCoinCount);
         globalCoinCountText.UpdateInfo(globalCoinCount);
+        UpdateScore();
     }
 }
