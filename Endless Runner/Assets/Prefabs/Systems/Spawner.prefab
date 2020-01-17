@@ -43,10 +43,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392f19bd8ea5c4d4a9a0d4abe8141e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObj: {fileID: 0}
   ground: {fileID: 6733392773394562245, guid: ccc8a27e641772a4cb21a8a061893faf, type: 3}
+  groundTileLength: 0
   smallCactus: {fileID: 6024033290068245791, guid: f7be29f74680c6e469b046af48164835,
     type: 3}
   cloud: {fileID: 1011778345027030692, guid: f70d24e56e52d9d4197582689fbd9cee, type: 3}
+  timerCloud: 0
+  timerCloudMin: 0.5
+  timerCloudMax: 3
   gameplaySpawnableObjects:
   - {fileID: 6157436195782417138, guid: fac9618e6fb8375479f8c30a9872a8ad, type: 3}
   - {fileID: 6024033290068245791, guid: 9382d274b35d18d4195a82de24b7cbcd, type: 3}
@@ -57,3 +62,4 @@ MonoBehaviour:
   - {x: 20, y: 2, z: 0}
   - {x: 20, y: 3.5, z: 0}
   numberOfTilesSpawned: 3
+  playerXPos: 0

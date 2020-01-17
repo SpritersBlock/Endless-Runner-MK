@@ -23,6 +23,6 @@ public class ScrollToTheSide : MonoBehaviour
 
     private void OnBecameInvisible() //Whenever objects go off-screen...
     {
-        Destroy(gameObject); //...they're destroyed, so that they're not hanging around in the game's memory
+        //Destroy(gameObject); //...they're destroyed, so that they're not hanging around in the game's memory
     }
 }
