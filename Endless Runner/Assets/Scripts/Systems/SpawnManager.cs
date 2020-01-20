@@ -16,6 +16,9 @@ public class SpawnManager : MonoBehaviour
 
     [Header("Foreground Elements")]
     public GameObject smallCactus;
+    [SerializeField] float timerFG;
+    [SerializeField] float timerFGMin = 1f;
+    [SerializeField] float timerFGMax = 5;
 
     [Header("Background Elements")]
     [SerializeField] GameObject cloud;
@@ -44,15 +47,28 @@ public class SpawnManager : MonoBehaviour
         playerXPos = playerObj.transform.position.x;
         objectPooler = ObjectPooler.instance;
         InitialGroundSpawn();
-        StartCoroutine("SpawnFGElements");
-        //StartCoroutine("SpawnBGElements");
     }
 
     private void FixedUpdate()
     {
         if (GameManager.instance.gameActive)
         {
+            SpawnFGElementTimer();
             SpawnBGElementTimer();
+        }
+    }
+
+    void SpawnFGElementTimer()
+    {
+        if (timerFG > 0)
+        {
+            timerFG -= Time.deltaTime;
+        }
+        else
+        {
+            GameObject objectToSpawn = gameplaySpawnableObjects[UnityEngine.Random.Range(0, gameplaySpawnableObjects.Length)]; //This just makes the next line a lot shorter
+            objectPooler.SpawnFromPool(objectToSpawn.name, objectToSpawn.transform.position, Quaternion.identity, transform);
+            timerFG = UnityEngine.Random.Range(timerFGMin, timerFGMax);
         }
     }
 
@@ -64,27 +80,21 @@ public class SpawnManager : MonoBehaviour
         }
         else
         {
-            objectPooler.SpawnFromPool("Cloud", bgSpawnPositions[UnityEngine.Random.Range(0, bgSpawnPositions.Length)], Quaternion.identity);
+            objectPooler.SpawnFromPool("Cloud", bgSpawnPositions[UnityEngine.Random.Range(0, bgSpawnPositions.Length)], Quaternion.identity, transform);
             timerCloud = UnityEngine.Random.Range(timerCloudMin, timerCloudMax);
         }
     }
 
     public void SpawnObjectType(string name, Vector3 objPos) //This way, we can type in a string of an object we want to spawn, and it will be instantiated
     {
-        GameObject objectClone = Array.Find(gameplaySpawnableObjects, GameObject => GameObject.name == name);
-        if (objectClone == null)
-        {
-            Debug.LogWarning("Game Object: " + name + " not found!");
-            return;
-        }
-        Instantiate(objectClone, objPos, Quaternion.identity, transform);
+        objectPooler.SpawnFromPool(name, objPos, Quaternion.identity, transform);
     }
 
     void InitialGroundSpawn()
     {
         for (int i = 0; i < numberOfTilesSpawned; i++)
         {
-            objectPooler.SpawnFromPool("Ground", ground.transform.position + new Vector3(groundTileLength * i, 0), Quaternion.identity); //Builds another ground tile ahead as many times as we set in numberOfTilesSpawned
+            objectPooler.SpawnFromPool("Ground", ground.transform.position + new Vector3(groundTileLength * i, 0), Quaternion.identity, transform); //Builds another ground tile ahead as many times as we set in numberOfTilesSpawned
         }
     }
 
@@ -92,19 +102,7 @@ public class SpawnManager : MonoBehaviour
     {
         if (GameManager.instance.gameActive) //Only load ground tiles when game is active
         {
-            objectPooler.SpawnFromPool("Ground", groundTransform.position + new Vector3(groundTileLength * numberOfTilesSpawned, 0), Quaternion.identity);
+            objectPooler.SpawnFromPool("Ground", groundTransform.position + new Vector3(groundTileLength * numberOfTilesSpawned, 0), Quaternion.identity, transform);
         }
-    }
-
-    IEnumerator SpawnFGElements()
-    {
-        while (GameManager.instance.gameActive)
-        {
-            yield return new WaitForSeconds(UnityEngine.Random.Range(GameManager.instance.gameSpeed / 5, GameManager.instance.gameSpeed / 2)); //Wait for a fraction of the game speed
-            GameObject instantiatedObject = gameplaySpawnableObjects[UnityEngine.Random.Range(0, gameplaySpawnableObjects.Length)]; //This just makes the next line a lot shorter
-            Instantiate(instantiatedObject, instantiatedObject.transform.position, Quaternion.identity, transform); //Spawn a gameplay object
-        }
-
-        yield return null;
     }
 }

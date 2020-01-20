@@ -57,6 +57,11 @@ MonoBehaviour:
   - {fileID: 6024033290068245791, guid: 9382d274b35d18d4195a82de24b7cbcd, type: 3}
   - {fileID: 8840671303643091768, guid: d23655f4bc86c9847bd490cef565e249, type: 3}
   - {fileID: 6024033290068245791, guid: f7be29f74680c6e469b046af48164835, type: 3}
+  gameplaySpawnablePooledObjects:
+  - CoinNull
+  - Cactus
+  - GroundPillar
+  - CactusSmall
   bgSpawnPositions:
   - {x: 20, y: 0.55, z: 0}
   - {x: 20, y: 2, z: 0}

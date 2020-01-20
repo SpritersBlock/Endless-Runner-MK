@@ -13,7 +13,7 @@ public abstract class CollectableItem : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             BeCollected();
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
