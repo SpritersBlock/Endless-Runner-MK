@@ -20,6 +20,8 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] float timerFGMin = 1f;
     [SerializeField] float timerFGMax = 5;
 
+    [SerializeField] float maxObjectsPerSpawn = 2;
+
     [Header("Background Elements")]
     [SerializeField] GameObject cloud;
     [SerializeField] float timerCloud;
@@ -53,7 +55,7 @@ public class SpawnManager : MonoBehaviour
     {
         if (GameManager.instance.gameActive)
         {
-            SpawnFGElementTimer();
+            //SpawnFGElementTimer();
             SpawnBGElementTimer();
         }
     }
@@ -102,7 +104,12 @@ public class SpawnManager : MonoBehaviour
     {
         if (GameManager.instance.gameActive) //Only load ground tiles when game is active
         {
-            objectPooler.SpawnFromPool("Ground", groundTransform.position + new Vector3(groundTileLength * numberOfTilesSpawned, 0), Quaternion.identity, transform);
+            GameObject newGroundTile = objectPooler.SpawnFromPool("Ground", groundTransform.position + new Vector3(groundTileLength * numberOfTilesSpawned, 0), Quaternion.identity, transform);
+
+            int numberOfObjectsToSpawn = Mathf.RoundToInt(UnityEngine.Random.Range(0, maxObjectsPerSpawn));
+            GameObject objectToSpawn = gameplaySpawnableObjects[UnityEngine.Random.Range(0, gameplaySpawnableObjects.Length)]; //This just makes the next line a lot shorter
+            objectPooler.SpawnFromPool(objectToSpawn.name, objectToSpawn.transform.position + new Vector3(UnityEngine.Random.Range(0, groundTileLength), 0), Quaternion.identity, newGroundTile.transform);
+            timerFG = UnityEngine.Random.Range(timerFGMin, timerFGMax);
         }
     }
 }

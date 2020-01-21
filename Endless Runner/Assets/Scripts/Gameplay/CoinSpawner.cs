@@ -27,13 +27,7 @@ public class CoinSpawner : MonoBehaviour, InterfacePooledObject
 
     void SpawnGroupOfCoins()
     {
-        if (transform.childCount > 0)
-        {
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                transform.GetChild(i).gameObject.SetActive(false);
-            }
-        }
+        DestroyExistingChildren();
 
         if (objectPooler == null)
         {
@@ -64,6 +58,17 @@ public class CoinSpawner : MonoBehaviour, InterfacePooledObject
                 {
                     objectPooler.SpawnFromPool("Coin", coinPosition + new Vector3(horizontalDistanceBetweenCoins * i * o, heightUnit), Quaternion.identity, transform);
                 }
+            }
+        }
+    }
+
+    void DestroyExistingChildren()
+    {
+        if (transform.childCount > 0)
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                transform.GetChild(i).gameObject.SetActive(false);
             }
         }
     }

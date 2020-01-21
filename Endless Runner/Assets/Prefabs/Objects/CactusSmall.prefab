@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6024033290068245779}
   - component: {fileID: 5016746318049395761}
   - component: {fileID: 2507674237193763593}
-  - component: {fileID: 2898027702818342114}
   - component: {fileID: 3086811144627786619}
   m_Layer: 0
   m_Name: CactusSmall
@@ -109,18 +108,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2748272, y: 2.0796669}
   m_EdgeRadius: 0
---- !u!114 &2898027702818342114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6024033290068245791}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3851ab2424ae7094d9176f3bdaa0315f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3086811144627786619
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -67,7 +67,7 @@ public class GroundPillar : MonoBehaviour, InterfacePooledObject
         {
             for (int i = 0; i < transform.childCount; i++)
             {
-                Destroy(transform.GetChild(i).gameObject);
+                transform.GetChild(i).gameObject.SetActive(false);
             }
         }
     }

@@ -1299,6 +1299,11 @@ PrefabInstance:
       propertyPath: timerFGMax
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2891745034786555729, guid: 081e723f8c7d16e42a3c0093ecd5e3bd,
+        type: 3}
+      propertyPath: numberOfTilesSpawned
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2891745034786555743, guid: 081e723f8c7d16e42a3c0093ecd5e3bd,
         type: 3}
       propertyPath: m_Name

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundScroller : MonoBehaviour
+public class GroundScroller : MonoBehaviour, InterfacePooledObject
 {
     //Ground tiles get their own scrolling script due to the fact that they are the one element that spawns consistently and with no randomness factored in.
 
@@ -12,6 +12,11 @@ public class GroundScroller : MonoBehaviour
     void Start()
     {
         playerXPos = SpawnManager.instance.playerXPos;
+    }
+
+    public void OnObjectSpawn()
+    {
+        DestroyExistingChildren();
     }
 
     private void LateUpdate()
@@ -26,6 +31,17 @@ public class GroundScroller : MonoBehaviour
             if (transform.position.x > playerXPos && hasSpawnedNewTile)
             {
                 hasSpawnedNewTile = false;
+            }
+        }
+    }
+
+    void DestroyExistingChildren()
+    {
+        if (transform.childCount > 0)
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                transform.GetChild(i).gameObject.SetActive(false);
             }
         }
     }
