@@ -26,7 +26,6 @@ public class ScoreManager : MonoBehaviour
 
     private void Awake()
     {
-        // vvv Singleton
         if (instance == null)
         {
             instance = this;
@@ -36,9 +35,6 @@ public class ScoreManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-        DontDestroyOnLoad(gameObject);
-        // ^^^ Singleton
     }
 
     private void Start()
@@ -53,18 +49,11 @@ public class ScoreManager : MonoBehaviour
         localCoinCount = 0;
         distanceTraveled = 0;
         score = 0;
-        //UpdateCoinCounterText();
-        Invoke("UpdateCoinCounterText", 0.5f); //For some reason calling this function too quickly just doesn't make it work??
+        FindUITexts();
+        UpdateCoinCounterText();
+        //Invoke("UpdateCoinCounterText", 1f); //For some reason calling this function too quickly just doesn't make it work??
         //If I have enough time I'm going to investigate this later but I want to get to object pooling by the end of today so this is taking a back seat for now.
     }
-
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.P))
-    //    {
-    //        UpdateCoinCounterText(); //Debug stuff
-    //    }
-    //}
 
     private void FixedUpdate()
     {
