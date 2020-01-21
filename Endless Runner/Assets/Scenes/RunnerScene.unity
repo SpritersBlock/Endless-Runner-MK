@@ -939,7 +939,7 @@ PrefabInstance:
     - target: {fileID: 2470019570485210050, guid: b444c7ba2b1ad154f8fb26b1afef1962,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.15
+      value: -20.15
       objectReference: {fileID: 0}
     - target: {fileID: 2470019570485210050, guid: b444c7ba2b1ad154f8fb26b1afef1962,
         type: 3}
@@ -1293,6 +1293,11 @@ PrefabInstance:
         type: 3}
       propertyPath: initialGround
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2891745034786555729, guid: 081e723f8c7d16e42a3c0093ecd5e3bd,
+        type: 3}
+      propertyPath: timerFGMax
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2891745034786555743, guid: 081e723f8c7d16e42a3c0093ecd5e3bd,
         type: 3}

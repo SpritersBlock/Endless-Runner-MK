@@ -8,6 +8,7 @@ public class GroundPillar : MonoBehaviour, InterfacePooledObject
     SpriteRenderer sr;
     BoxCollider2D boxC;
     ObjectPooler objectPooler;
+    float cactusHeight;
 
     [Header("Ground Size Values")] //How tall/wide the ground is. Set in start to avoid complications with the spawn manager
     [SerializeField] float platformMinWidth = 1; //These are all default values and probably
@@ -22,14 +23,14 @@ public class GroundPillar : MonoBehaviour, InterfacePooledObject
     void Start()
     {
         objectPooler = ObjectPooler.instance;
-        OnObjectSpawn();
+        //OnObjectSpawn();
     }
 
     public void OnObjectSpawn()
     {
+        DestroyExistingChildren();
         sr = GetComponent<SpriteRenderer>();
         boxC = GetComponent<BoxCollider2D>();
-        DestroyExistingChildren();
         sr.size = new Vector2(Random.Range(platformMinWidth, platformMaxWidth), Random.Range(platformMinHeight, platformMaxHeight));
         boxC.size = sr.size;
         SpawnObjectsOnTop();
@@ -42,7 +43,7 @@ public class GroundPillar : MonoBehaviour, InterfacePooledObject
             objectPooler = ObjectPooler.instance;
         }
 
-        spawnObjectsOnTop = (Random.value > 0.5f); //Randomly chooses whether to spawn objects on top of the pillar
+        spawnObjectsOnTop = (Random.value > 0.1f); //Randomly chooses whether to spawn objects on top of the pillar
         if (spawnObjectsOnTop)
         {
             bool spawnCoins = (Random.value > 0.5f); //Randomly chooses whether to spawn coins on top of the pillar
@@ -50,10 +51,12 @@ public class GroundPillar : MonoBehaviour, InterfacePooledObject
             {
                 objectPooler.SpawnFromPool("CoinNull", transform.position + new Vector3(Random.Range(sr.size.x / -2, sr.size.x / 2), sr.size.y / 2), Quaternion.identity, transform.parent);
             }
-            bool spawnCactus = (Random.value > 0.5f); //Randomly chooses whether to spawn cacti on top of the pillar
+            bool spawnCactus = (Random.value > 0.1f); //Randomly chooses whether to spawn cacti on top of the pillar
             if (spawnCactus) //We'll spawn a small cactus up here so it's not too overwhelming
             {
-                objectPooler.SpawnFromPool("CactusSmall", transform.position + new Vector3(Random.Range(sr.size.x / -2, sr.size.x / 2), sr.size.y / 2) + new Vector3(0, SpawnManager.instance.smallCactus.GetComponent<SpriteRenderer>().sprite.bounds.extents.y), Quaternion.identity, transform.parent); //Spawns a cactus anywhere on the platform top, making sure to bump the cactus up by its own height since its pivot is in the center
+                cactusHeight = Mathf.Abs(SpawnManager.instance.smallCactus.GetComponent<SpriteRenderer>().bounds.extents.y);
+                Vector3 randomPositionAtopGroundPillar = new Vector3(Random.Range(sr.size.x / -2, sr.size.x / 2), sr.size.y / 2);
+                GameObject spawnedCactus = objectPooler.SpawnFromPool("CactusSmall", transform.position + randomPositionAtopGroundPillar + new Vector3(0, cactusHeight), Quaternion.identity, transform.parent); //Spawns a cactus anywhere on the platform top, making sure to bump the cactus up by its own height since its pivot is in the center
             }
         }
     }
