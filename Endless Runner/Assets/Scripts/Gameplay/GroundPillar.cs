@@ -23,7 +23,6 @@ public class GroundPillar : MonoBehaviour, InterfacePooledObject
     void Start()
     {
         objectPooler = ObjectPooler.instance;
-        //OnObjectSpawn();
     }
 
     public void OnObjectSpawn()

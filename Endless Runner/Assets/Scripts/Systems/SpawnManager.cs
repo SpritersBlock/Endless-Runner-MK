@@ -55,7 +55,6 @@ public class SpawnManager : MonoBehaviour
     {
         if (GameManager.instance.gameActive)
         {
-            //SpawnFGElementTimer();
             SpawnBGElementTimer();
         }
     }

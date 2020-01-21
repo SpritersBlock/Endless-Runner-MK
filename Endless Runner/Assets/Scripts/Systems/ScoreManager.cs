@@ -51,8 +51,6 @@ public class ScoreManager : MonoBehaviour
         score = 0;
         FindUITexts();
         UpdateCoinCounterText();
-        //Invoke("UpdateCoinCounterText", 1f); //For some reason calling this function too quickly just doesn't make it work??
-        //If I have enough time I'm going to investigate this later but I want to get to object pooling by the end of today so this is taking a back seat for now.
     }
 
     private void FixedUpdate()

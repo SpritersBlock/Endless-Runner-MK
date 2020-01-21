@@ -19,7 +19,6 @@ public class ObjectPooler : MonoBehaviour
 
     private void Awake()
     {
-        // vvv Singleton
         if (instance == null)
         {
             instance = this;
@@ -29,9 +28,6 @@ public class ObjectPooler : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-        //DontDestroyOnLoad(gameObject);
-        // ^^^ Singleton
     }
 
     // Start is called before the first frame update

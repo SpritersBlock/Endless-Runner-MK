@@ -72,17 +72,4 @@ public class CoinSpawner : MonoBehaviour, InterfacePooledObject
             }
         }
     }
-
-    //IEnumerator CheckForChildren() //If this object has no more children, destroy it to free up memory
-    //{
-    //    while (true)
-    //    {
-    //        yield return new WaitForSeconds(2); //Checks every two seconds if it has children or not. Doing it in update seems a bit excessive
-    //        if (transform.childCount == 0) //If there's no child...
-    //        {
-    //            Destroy(gameObject); //...destroy the parent
-    //        }
-    //        yield return null;
-    //    }
-    //}
 }
